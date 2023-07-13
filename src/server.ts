@@ -12,7 +12,7 @@ export class Server {
             fetch(request) {
                 const url = new URL(request.url);
                 if (url.pathname === "/") return new Response(`Home page!`);
-                if (url.pathname === "/create_account") return this.postCreateAccount();
+                if (url.pathname === "/create_account") return postCreateAccount();
                 if (url.pathname === "/login") return this.postLogin();
                 if (url.pathname === "/create_thread") return this.postNewThread();
                 if (url.pathname === "/create_comment") return this.postNewComment();
