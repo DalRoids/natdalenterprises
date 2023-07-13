@@ -28,7 +28,7 @@ export class Server {
     postCreateAccount(request: PostCreateAccountRequest): Response {
         // 1. Enter username/password into db
         // 2. Return 200-OK
-        return new Response(null, { status: 200 });
+        return new Response("Hello, World!");
     }
 
     postLogin(request: PostLoginRequest): Response {
