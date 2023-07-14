@@ -15,6 +15,12 @@ cd natdalenterprises
 bun index.ts
 ```
 
+3. Test an endpoint
+```bash
+curl localhost:3000/create_account
+curl localhost:3000/threads
+```
+
 ## One Time Setup
 We are going to use typescript. Hopefully [Bun](https://bun.sh/) is mature enough to work ok-ish.
 

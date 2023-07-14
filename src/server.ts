@@ -9,20 +9,22 @@ export class Server {
         const server = Bun.serve({
             development: true,
             port: this.port,
-            fetch(request) {
-                const url = new URL(request.url);
-                if (url.pathname === "/") return new Response(`Home page!`);
-                if (url.pathname === "/create_account") return this.postCreateAccount();
-                if (url.pathname === "/login") return this.postLogin();
-                if (url.pathname === "/create_thread") return this.postNewThread();
-                if (url.pathname === "/create_comment") return this.postNewComment();
-                if (url.pathname === "/threads") return this.getThreads();
-                if (url.pathname === "/thread") return this.getThread();
-                return new Response(`404!`);
-            },
+            fetch: (request) => this.handle(request),
         });
 
         console.log(`Listening on localhost:${server.port}`);
+    }
+
+    handle(request: Request) {
+        const url = new URL(request.url);
+        if (url.pathname === "/") return new Response(`Home page!`);
+        if (url.pathname === "/create_account") return this.postCreateAccount({ username: "", password: "" });
+        if (url.pathname === "/login") return this.postLogin({ username: "", password: "" });
+        if (url.pathname === "/create_thread") return this.postNewThread({ auth_token: "", name: "", contents: "'" });
+        if (url.pathname === "/create_comment") return this.postNewComment({ auth_token: "", parent_thread_id: "", contents: "" });
+        if (url.pathname === "/threads") return this.getThreads();
+        if (url.pathname === "/thread") return this.getThread();
+        return new Response(`404!`);
     }
 
     postCreateAccount(request: PostCreateAccountRequest): Response {
